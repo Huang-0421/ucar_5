@@ -1,0 +1,15 @@
+yolo_model:
+
+  config_file:
+    name: xpfz_tiny.cfg
+  weight_file:
+    name: xpfz_tiny_final.weights
+  threshold:
+    value: 0.3
+  detection_classes:
+    names:
+      - glass
+      - no_glasses
+      - long_hair
+      - short_hair
+

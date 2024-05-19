@@ -1,0 +1,17 @@
+yolo_model:
+
+  config_file:
+    name: yolov3-tiny-dp.cfg  #yolov3-tiny-0727.cfg                        #yolov3-tiny-0713_60000.cfg                              #yolov3-tiny-0713.cfg
+  weight_file:
+    name: yolov3-tiny-dp_last.weights   #yolov3-tiny-0727.weights              #yolov3-tiny-0713_60000.weights                   # yolov3-tiny-0713_50000.weights
+  threshold:
+    value: 0.3
+  detection_classes:
+    names:
+      - terrorist_1
+      - terrorist_2
+      - terrorist_3
+      - first_aid
+      - bomb
+      - spontoon
+      - armor

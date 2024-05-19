@@ -1,0 +1,14 @@
+<!-- 
+This launch file starts soundplay_node.py, which is the node that plays
+sounds based on messages on the robotsound topic.  
+-->
+
+<launch>
+  <arg name="device" default="" />
+  <node name="soundplay_node" pkg="sound_play" type="soundplay_node.py">
+    <param name="device" value="$(arg device)" />
+  </node>
+  <node name="play" pkg="sound_play" type="S1.py" output="screen"/>
+  <node name="detector" pkg="sound_play" type="detector_node.py" output="screen"/>
+  <!-- <node name="ucar_timer" pkg="sound_play" type="time_play.py" output="screen"/> -->
+</launch>

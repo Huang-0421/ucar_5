@@ -1,0 +1,95 @@
+TebLocalPlannerROS:
+  odom_topic: odom
+  map_frame: /map
+
+  acc_lim_x: 0.5 #0.3  0.15  #机器人的最大平移加速度，单位为米/秒^2
+  acc_lim_y: 0.5 #0.3  #0.15  #机器人的最大扫射加速度
+  acc_lim_theta: 6.5 #8 #2.5  #机器人的最大角加速度，单位为弧度/秒^2
+  max_vel_x: 20 #20 16.25   #机器人的最大平移速度，单位为米/秒
+  max_vel_x_backwards: 20 #25 16.45   #机器人倒车时的最大绝对平移速度，单位为米/秒 。
+  max_vel_y: 20 #20 16.25  #机器人的最大扫射速度(对于非完整机器人应该为零!)
+  max_vel_theta: 20 #16.55   #机器人的最大角速度，单位为弧度/秒
+
+
+  min_turning_radius: 0
+  is_footprint_dynamic: false
+  footprint_model:
+    #type:"polygon"
+    #vertices:[[0.16, 0.11], [-0.16, 0.11], [-0.16, -0.11], [0.16, -0.11]]
+    type: "line"
+    line_start: [-0.13, 0.0]
+    line_end: [0.13, 0.0]
+
+  #终点容忍度
+  yaw_goal_tolerance: 0.35 #0.1  
+  xy_goal_tolerance: 0.35 #0.15
+  free_goal_vel: True
+
+  #轨迹配置参数
+  dt_ref: 0.25   #0.3
+  dt_hysteresis: 0.1 #0.1
+  min_samples: 3 
+  global_plan_overwrite_orientation: true
+  global_plan_viapoint_sep: 0.1 #0.1  
+  max_global_plan_lookahead_dist: 1.5 #2  1.75 #考虑优化的全局计划子集的最大长度（累积欧几里得距离）
+  force_reinit_new_goal_dist: 1.0
+  feasibility_check_no_poses: 1 #1    #在判断生成的轨迹是否冲突时使用，此时设置为3，即从轨迹起点开始逐个检查轨迹上的3个点，若3个点均不发生碰撞，则认为本次轨迹有效。   
+  publish_feedback: false
+  allow_init_with_backwards_motion: false
+  exact_arc_length: false
+  shrink_horizon_backup: true
+  shrink_horizon_min_duration: 10.0
+
+  #障碍参数
+  min_obstacle_dist: 0.25  #0.3 #最小障碍物距离
+  include_costmap_obstacles: true
+  costmap_obstacles_behind_robot_dist: 1
+  inflation_dist: 0.25  #0.31  0.3 #障碍物膨胀半径
+  include_dynamic_obstacles: false
+  legacy_obstacle_association: false
+  obstacle_association_force_inclusion_factor: 0.5 #在此半径内强制考虑障碍物
+  obstacle_association_cutoff_factor: 5
+  costmap_converter_plugin: ""
+  costmap_converter_spin_thread: true
+  costmap_converter_rate: 5.0
+
+  #优化参数
+  no_inner_iterations: 3 #2
+  no_outer_iterations: 3 #3
+  penalty_epsilon: 0.1 #此项为速度等约束提供类似膨胀层的缓冲效果。接近限速将产生一定的惩罚值
+  weight_acc_lim_x: 2 #1.0 
+  weight_acc_lim_theta: 17 #17
+  weight_max_vel_x: 1.2  #3.0
+  weight_max_vel_theta: 13.0 #6.0
+  weight_kinematics_nh: 1000 #1000 #300.0 #调整顺应纵向运动和非顺应横向运动（扫射）之间的权衡。
+  weight_kinematics_forward_drive: 1000  #80  1000.0
+  weight_kinematics_turning_radius: 1000.0
+  weight_optimaltime:  50 #70 #50 #45.5 #这个参数是最优时间权重，如果大了，那么车会在直道上快速加速，并且路径规划的也会切内道
+  weight_obstacle: 130.0  #150
+  weight_viapoint: 500  #200
+  weight_inflation: 0.20 #0.05
+  weight_adapt_factor: 2.0
+
+  #不同拓扑中的并行规划  #
+  enable_homotopy_class_planning: false
+  enable_multithreading: false
+  max_number_classes: 2 #4 改 2 规划出的最多轨迹数,这个参数是可以解决多个障碍堵路规划抖动问题
+  selection_cost_hysteresis: 1.0
+  selection_obst_cost_scale: 100.0
+  selection_viapoint_cost_scale: 1.0
+  selection_alternative_time_cost: false
+  roadmap_graph_no_samples: 15
+  roadmap_graph_area_width: 5
+  h_signature_prescaler: 1.0 
+  h_signature_threshold: 0.1
+  obstacle_heading_threshold: 0.45
+  visualize_hc_graph: false
+  viapoints_all_candidates: true
+  switching_blocking_period: 0.0
+  wheelbase: 0.2
+
+  # #优化直线加速，与障碍弯道减速
+  # obstacle_proximity_ratio_max_vel: 0.1 # 接近障碍物而降低速度时用作上限最大速度比
+  # obstacle_proximity_lower_bound: 0.0
+  # obstacle_proximity_upper_bound: 1.5
+  # weight_velocity_obstacle_ratio: 100.0 #约束的权重

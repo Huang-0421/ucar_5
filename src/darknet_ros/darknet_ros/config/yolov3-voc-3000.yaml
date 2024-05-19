@@ -1,0 +1,19 @@
+yolo_model:
+
+  config_file:
+    name: yolov3-voc.cfg
+  weight_file:
+    name: yolov3-voc-3000.weights
+  threshold:
+    value: 0.3
+  detection_classes:
+    names:
+      - tableware
+      - pet
+      - bed
+      - television
+      - person
+      - sofa
+      - food
+      - table/chair
+

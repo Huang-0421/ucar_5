@@ -1,0 +1,8 @@
+prefix=/home/ucar/ucar_5/devel
+
+Name: ucar_controller
+Description: Description of ucar_controller
+Version: 1.1.0
+Cflags: -I/home/ucar/ucar_5/devel/include
+Libs: -L${prefix}/lib 
+Requires: message_runtime

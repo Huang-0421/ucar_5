@@ -1,0 +1,24 @@
+<launch>
+  <!-- base driver -->
+  <include file="$(find ucar_controller)/launch/base_driver.launch">
+  </include>
+  <!-- lidar driver -->
+  <include file="$(find ydlidar)/launch/ydlidar.launch"/>
+  <!-- gmapping -->
+     <include file="$(find ucar_map)/launch/gmapping.launch"/>
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen" clear_params="true">
+    <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
+    <!-- <param name="controller_frequency" value="20.0" /> -->
+    <!-- <param name="controller_patience" value="20.0" /> -->
+    <rosparam file="$(find ucar_nav)/launch/config/teb/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find ucar_nav)/launch/config/teb/costmap_common_local_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find ucar_nav)/launch/config/teb/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find ucar_nav)/launch/config/teb/global_costmap_params.yaml" command="load" />
+
+    <!-- <rosparam file="$(find ucar_nav)/launch/config/teb/costmap_converter_params.yaml" command="load" /> -->
+
+    <rosparam file="$(find ucar_nav)/launch/config/teb/move_base_params.yaml" command="load" />
+    <rosparam file="$(find ucar_nav)/launch/config/teb/base_global_planner_params.yaml" command="load" />
+    <rosparam file="$(find ucar_nav)/launch/config/teb/teb_local_planner_params.yaml" command="load" />
+     </node> 
+    </launch>

@@ -1,0 +1,16 @@
+int16 tableware_num  
+int16 pet_num
+int16 bed_num
+int16 television_num
+int16 person_num
+int16 sofa_num
+int16 food_num
+int16 table_chair_num
+int16 tableware_cut_num  
+int16 pet_cut_num
+int16 bed_cut_num
+int16 television_cut_num
+int16 person_cut_num
+int16 sofa_cut_num
+int16 food_cut_num
+int16 table_chair_cut_num
