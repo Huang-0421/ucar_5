@@ -266,7 +266,7 @@ def img_callback(data):
     if f==10 :
         if  img_flag == 10:
             print("start fllower line----------------------")   
-            bridge = cv_bridge.CvBridge()   #bridge是一个CvBridge对象，用于将ROS图像消息转换为OpenCV图像格式
+            bridge = cv_bridge.CvBridge()   
             image = bridge.imgmsg_to_cv2(data,desired_encoding='bgr8')  #将ROS图像消息转换为OpenCV图像格式
             image = cv2.resize(image, (640, 480))   #将图像大小调整为640x480
             image = cv2.flip(image,1)   #水平翻转图像
